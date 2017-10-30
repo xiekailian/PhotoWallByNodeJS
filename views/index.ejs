@@ -1,11 +1,48 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>css3照片墙</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .container {
+      width: 1200px;
+      height: 600px;
+      margin: 50px auto;
+    }
+    img {
+      vertical-align: top;
+      padding: 10px 10px 15px 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      -webkit-transform: rotate(20deg);/*设置旋转角度*/
+      -moz-transform: rotate(20deg);
+      transform: rotate(20deg);
+      margin: 36px;
+    }
+    img:hover {
+      -webkit-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      transform: rotate(0deg);
+      -webkit-transform: scale(1.5);/*设置放大倍数*/
+      -moz-transform: scale(1.5);
+      transform: scale(1.5);
+      -webkit-transition: 2s;/*设置动画时间*/
+      -moz-transition: 2s;
+      transition: 2s;
+      box-shadow: 10px 10px 5px #EFEFEF;
+    }
+  </style>
+</head>
+<body>
+<h1>照片墙</h1>
+<div class="container"> <img src="images/01.png"/> <img src="images/02.png"/> <img src="images/03.png"/> <img src="images/04.png"/> <img src="images/05.png"/> <img src="images/06.png"/> </div>
+</body>
 </html>
