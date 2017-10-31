@@ -45,9 +45,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/login', users); // 即为为路径 /login 设置路由
-app.use('/register', users); // 即为为路径 /register 设置路由
-app.use("/logout", users); // 即为为路径 /logout 设置路由
+// app.use('/login', users);
+// app.use('/register', users); // 即为为路径 /register 设置路由
+// app.use("/logout", users); // 即为为路径 /logout 设置路由
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
