@@ -7,9 +7,10 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var session = require('express-session');
 
-var app = express();
+var session = require('express-session');
+var util = require('util');
+var sqlite3 = require('sqlite3');
 
 var app = express();
 app.use(session({
