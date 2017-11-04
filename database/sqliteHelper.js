@@ -135,7 +135,7 @@ allNotes和forAll函数是操作所有数据的两种方法，allNotes把数据�
  */
 exports.findNoteById = function (tableName, keyName, keyValue, callback) {
     var didOne = false;
-    db.each("SELECT * FROM " + id + " WHERE " + keyName + " = ?",
+    db.each("SELECT * FROM " + tableName + " WHERE " + keyName + " = ?",
         [keyValue],
         function (err, row) {
             if (err) {

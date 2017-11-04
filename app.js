@@ -37,6 +37,13 @@ app.on('close', function (error) {
 //     }
 // );
 
+// sqliteHelper.findNoteById("users","userName","xkl",
+//     function(error, result){
+//         if (error) throw error;
+//         console.log("users1:" + result.password);
+//     });
+
+
 app.use(session({
     secret: 'secret',
     cookie: {
