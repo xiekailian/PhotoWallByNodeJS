@@ -133,17 +133,18 @@ exports.forAll = function (tableName, doEach, done) {
 allNotes和forAll函数是操作所有数据的两种方法，allNotes把数据库中所有的数据行收集到一个数组里，
 而forAll方法可以接受两个回调函数，每当从数据集中拿一行数据，回调函数doEach都会执行一遍，当读完所有数据时，回调函数done就会执行
  */
-exports.findNoteById = function (tableName, keyName, keyValue, callback) {
+exports.findNoteById = function (tableName, keyName, keyValue, success) {
     var didOne = false;
     db.each("SELECT * FROM " + tableName + " WHERE " + keyName + " = ?",
         [keyValue],
         function (err, row) {
             if (err) {
                 util.log('FAIL to retrieve row ' + err);
-                callback(err, null);
+                success(err, null);
             } else {
                 if (!didOne) {
-                    callback(null, row);
+                    console.log("success!");
+                    success(null, row);
                     didOne = true;  //保证回调函数只被执行一次
                 }
             }

@@ -13,6 +13,7 @@ var util = require('util');
 var url = require('url')
 var sqlite3 = require('sqlite3');
 var sqliteHelper = require('./database/sqliteHelper');
+var async = require('async');
 
 var app = express();
 
@@ -36,12 +37,33 @@ app.on('close', function (error) {
 //         }
 //     }
 // );
+var x = null;
+async.series([function (cb) {
+    console.log("aaaaaaaaa");
+    cb();
+},function (cb) {
+    sqliteHelper.findNoteById("users", "userName", "xkl",
+        function (error, result) {
+            if (error) throw cb(error,null);
+            console.log("users1:" + result);
+            x = result;
+            cb(null,result);
+        },
+        function (error,result) {
+            if (error) throw cb(error,null);
+            console.log("users3:" + result);
+            x = result;
+            cb(null,result);
+        });
+},function (cb) {
+    console.log("bbbbbbbbbb:" + x);
+    cb();
+}],function (error,values) {
+    console.log("zzz")
+    if (error) throw error;
 
-// sqliteHelper.findNoteById("users","userName","xkl",
-//     function(error, result){
-//         if (error) throw error;
-//         console.log("users1:" + result.password);
-//     });
+});
+
 
 
 app.use(session({
