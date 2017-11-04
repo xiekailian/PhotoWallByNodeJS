@@ -10,9 +10,33 @@ var users = require('./routes/users');
 
 var session = require('express-session');
 var util = require('util');
+var url = require('url')
 var sqlite3 = require('sqlite3');
+var sqliteHelper = require('./database/sqliteHelper');
 
 var app = express();
+
+sqliteHelper.connect(function (err) {
+    if (err)
+        throw err;
+});
+app.on('close', function (error) {
+    sqliteHelper.disconnect(function (err) {
+    });
+});
+
+//测试数据库连接
+// sqliteHelper.allNotes("users", function (err, result) {
+//         if (err) {
+//             util.log('ERROR ' + err);
+//             throw err;
+//         } else {
+//             console.log("users1:" + result[0].userName);
+//             util.log('users2:' + result);
+//         }
+//     }
+// );
+
 app.use(session({
     secret: 'secret',
     cookie: {
@@ -20,13 +44,13 @@ app.use(session({
     }
 }));
 
-app.use(function(req,res,next){
+app.use(function (req, res, next) {
     res.locals.user = req.session.user;   // 从session 获取 user对象
     var err = req.session.error;   //获取错误信息
     delete req.session.error;
     res.locals.message = "";   // 展示的信息 message
-    if(err){
-        res.locals.message = '<div class="alert alert-danger" style="margin-bottom:20px;color:red;">'+err+'</div>';
+    if (err) {
+        res.locals.message = '<div class="alert alert-danger" style="margin-bottom:20px;color:red;">' + err + '</div>';
     }
     next();  //中间件传递
 });

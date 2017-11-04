@@ -1,6 +1,6 @@
 var util = require('util');
 var async = require('async');  //npm install async
-var sqliteHelper = require('./sqliteHelper');
+var sqliteHelper = require('./database/sqliteHelper');
 sqliteHelper.connect(function (error) {
     if (error) throw error;
 });

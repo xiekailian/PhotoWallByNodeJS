@@ -4,10 +4,10 @@ var sqlite3 = require('sqlite3');
 sqlite3.verbose();
 var db = undefined;
 /*
- 数据库名是直接硬编码的，所以当调用connect和setup函数时，当前目录中就会生成phoneWall.sqlite3文件
+ 数据库名是直接硬编码的，所以当调用connect和setup函数时，database目录中就会生成phoneWall.sqlite3文件
  */
 exports.connect = function (callback) {
-    db = new sqlite3.Database("phoneWall.sqlite3", sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
+    db = new sqlite3.Database("database/phoneWall.sqlite3", sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE,
         function (err) {
             if (err) {
                 util.log('FAIL on creating database ' + err);
@@ -19,6 +19,7 @@ exports.connect = function (callback) {
 }
 //此处的disconnect函数是空的
 exports.disconnect = function (callback) {
+    db.close();
     callback(null);
 }
 exports.setup = function (tableName, colNames, colTypes, callback) {
