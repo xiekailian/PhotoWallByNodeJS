@@ -14,7 +14,7 @@
 <body screen_capture_injected="true">
 <div class="container">
     <%- message %>
-    <form class="col-sm-offset-4 col-sm-4 form-horizontal" role="form" method="post" onsubmit="return false">
+    <form class="col-sm-offset-4 col-sm-4 form-horizontal" method="post" action="/users/register">
         <fieldset>
             <legend></legend>
             <div class="panel panel-default">
@@ -27,7 +27,7 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名" required>
+                            <input type="text" class="form-control" id="username" name="userName" placeholder="请输入用户名" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary btn-block" id="register1">注册</button>
+                        <input type="submit" class="btn btn-primary btn-block" id="register1" value="注册"/>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-info col-sm-2 col-sm-offset-10" id="login1">登录</button>

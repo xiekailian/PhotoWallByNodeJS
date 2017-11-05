@@ -1,19 +1,53 @@
 //user数据库接口库
 var util = require('util');
 var sqliteHelper = require('./sqliteHelper');
+var async = require('async');
 var tableName = "users";
 var colNames = ["userName", "password"];
 var keyName = "userName";
 
 exports.addAUser = function (values, callback) {
-    let userName = null;
-    sqliteHelper.findNoteById(tableName, keyName, values[0], function (error, result) {
+    let user = null;
+    let addStatus = 0;
+    // let userName = null;
+
+    async.series([function (cb) {
+        sqliteHelper.findNoteById(tableName, keyName, values[0],
+            function (error, result) {
+                if (error) throw cb(error, null);
+                console.log("users1:" + result.userName);
+                user = result;
+                // cb(null,result);
+            },
+            function (error) {
+                if (error) throw cb(error, null);
+                cb(null);
+            });
+    }, function (cb) {
+        //0代表error,1代表成功添加用户,2代表用户已存在无法添加
+        if (user === null) {
+            sqliteHelper.add("users", colNames, values,
+                function (error) {
+                    if (error) {
+                        util.log('Fail on add a user:' + values[0] + 'because of error:' + error);
+                        callback(error, 0);
+                    }
+                    else {
+                        callback(null, 1);
+                    }
+                    cb(error);
+                });
+        }
+        else {
+            callback(null, 2);
+            cb();
+        }
+
+    }], function (error, values) {
+        console.log("zzz")
         if (error) throw error;
-        // if (result)
-        userName = result.userName;
     });
 
-    sqliteHelper.add("users", colNames, values,)
 }
 /*
 run函数接受一个字符串参数，其中?表示占位符，占位符的值必须通过一个数组传递进来

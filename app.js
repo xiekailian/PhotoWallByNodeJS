@@ -37,32 +37,28 @@ app.on('close', function (error) {
 //         }
 //     }
 // );
-var x = null;
-async.series([function (cb) {
-    console.log("aaaaaaaaa");
-    cb();
-},function (cb) {
-    sqliteHelper.findNoteById("users", "userName", "xkl",
-        function (error, result) {
-            if (error) throw cb(error,null);
-            console.log("users1:" + result);
-            x = result;
-            cb(null,result);
-        },
-        function (error,result) {
-            if (error) throw cb(error,null);
-            console.log("users3:" + result);
-            x = result;
-            cb(null,result);
-        });
-},function (cb) {
-    console.log("bbbbbbbbbb:" + x);
-    cb();
-}],function (error,values) {
-    console.log("zzz")
-    if (error) throw error;
-
-});
+// var x = null;
+// async.series([function (cb) {
+//     sqliteHelper.findNoteById("users", "userName", "xkl",
+//         function (error, result) {
+//             if (error) throw cb(error,null);
+//             console.log("users1:" + result.userName);
+//             x = result;
+//             // cb(null,result);
+//         },
+//         function (error) {
+//             if (error) util.log("fuck");
+//             else util.log("good");
+//             // x = result;
+//             cb();
+//         });
+// },function (cb) {
+//     console.log("result:" + x);
+//     cb();
+// }],function (error,values) {
+//     console.log("zzz")
+//     if (error) throw error;
+// });
 
 
 
