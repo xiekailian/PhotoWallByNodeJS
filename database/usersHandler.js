@@ -15,7 +15,7 @@ exports.addAUser = function (values, callback) {
         sqliteHelper.findNoteById(tableName, keyName, values[0],
             function (error, result) {
                 if (error) throw cb(error, null);
-                console.log("users1:" + result.userName);
+                // console.log("users1:" + result.userName);
                 user = result;
                 // cb(null,result);
             },
@@ -34,6 +34,7 @@ exports.addAUser = function (values, callback) {
                     }
                     else {
                         callback(null, 1);
+                        // console.log("exist");
                     }
                     cb(error);
                 });
@@ -44,7 +45,7 @@ exports.addAUser = function (values, callback) {
         }
 
     }], function (error, values) {
-        console.log("zzz")
+        // console.log("zzz")
         if (error) throw error;
     });
 

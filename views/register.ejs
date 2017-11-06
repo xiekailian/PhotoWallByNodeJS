@@ -95,11 +95,9 @@
                 $("#password1").css("border", "1px solid red");
             }
             else if (password !== password1) {
-                alert("not equals");
                 $("#password").css("border", "1px solid red");
                 $("#password1").css("border", "1px solid red");
             } else if (password === password1) {
-                alert("equals");
                 var data = {"userName": username, "password": password};
                 $.ajax({
                     url: '/users/register',
