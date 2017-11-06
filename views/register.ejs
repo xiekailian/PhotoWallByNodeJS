@@ -7,14 +7,21 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.css" media="screen">
     <style type="text/css">
-        .m15{ margin: 15px;}
-        .tc{ text-align: center;font-size: 18px;font-weight: 600;}
+        .m15 {
+            margin: 15px;
+        }
+
+        .tc {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body screen_capture_injected="true">
 <div class="container">
     <%- message %>
-    <form class="col-sm-offset-4 col-sm-4 form-horizontal" method="post" action="/users/register">
+    <form class="col-sm-offset-4 col-sm-4 form-horizontal" method="post" onsubmit="return false">
         <fieldset>
             <legend></legend>
             <div class="panel panel-default">
@@ -27,7 +34,8 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-user"></span>
                         </span>
-                            <input type="text" class="form-control" id="username" name="userName" placeholder="请输入用户名" required>
+                            <input type="text" class="form-control" id="username" name="userName" placeholder="请输入用户名"
+                                   required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -35,7 +43,8 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                         </span>
-                            <input type="text" class="form-control" id="password" name="password" placeholder="请输入密码" required>
+                            <input type="text" class="form-control" id="password" name="password" placeholder="请输入密码"
+                                   required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -43,11 +52,12 @@
                         <span class="input-group-addon">
                         <span class="glyphicon glyphicon-lock"></span>
                         </span>
-                            <input type="text" class="form-control" id="password1" name="password1" placeholder="请再次输入密码" required>
+                            <input type="text" class="form-control" id="password1" name="password1"
+                                   placeholder="请再次输入密码" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary btn-block" id="register1" value="注册"/>
+                        <button class="btn btn-primary btn-block" id="register1">注册</button>
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-info col-sm-2 col-sm-offset-10" id="login1">登录</button>
@@ -61,30 +71,48 @@
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
 <script type="text/javascript">
-    $(function(){
-        $("#login1").click(function(){
+    $(function () {
+        $("#login1").click(function () {
             location.href = 'login';
         });
-        $("#register1").click(function(){
+        $("#register1").click(function () {
             var username = $("#username").val();
             var password = $("#password").val();
             var password1 = $("#password1").val();
-            if(password !== password1){
-                $("#password").css("border","1px solid red");
-                $("#password1").css("border","1px solid red");
-            }else if(password === password1){
-                var data = {"uname":username,"upwd":password};
+            if (username === '') {
+                $("#username").css("border", "1px solid red");
+                $("#password").css("border", "1px solid #ccc");
+                $("#password1").css("border", "1px solid #ccc");
+            }
+            else if (password === '') {
+                $("#username").css("border", "1px solid #ccc");
+                $("#password").css("border", "1px solid red");
+                $("#password1").css("border", "1px solid #ccc");
+            }
+            else if (password1 === '') {
+                $("#username").css("border", "1px solid #ccc");
+                $("#password").css("border", "1px solid #ccc");
+                $("#password1").css("border", "1px solid red");
+            }
+            else if (password !== password1) {
+                alert("not equals");
+                $("#password").css("border", "1px solid red");
+                $("#password1").css("border", "1px solid red");
+            } else if (password === password1) {
+                alert("equals");
+                var data = {"userName": username, "password": password};
                 $.ajax({
-                    url: '/register',
+                    url: '/users/register',
                     type: 'post',
                     data: data,
-                    success: function(data,status){
-                        if(status == 'success'){
+                    success: function (data, status) {
+                        if (status == 'success') {
                             location.href = 'login';
                         }
                     },
-                    error: function(data,err){
+                    error: function (data, err) {
                         location.href = 'register';
+                        console.log("register error:" + err);
                     }
                 });
             }
