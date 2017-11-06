@@ -6,9 +6,11 @@ var tableName = "users";
 var colNames = ["userName", "password"];
 var keyName = "userName";
 
+/*
+添加一个用户
+ */
 exports.addAUser = function (values, callback) {
     let user = null;
-    let addStatus = 0;
     // let userName = null;
 
     async.series([function (cb) {
@@ -51,20 +53,55 @@ exports.addAUser = function (values, callback) {
 
 }
 /*
-run函数接受一个字符串参数，其中?表示占位符，占位符的值必须通过一个数组传递进来
-调用者提供了一个回调函数，然后通过这个回调函数来声明错误
+用户登录判断
  */
-exports.delete = function (ts, callback) {
-    db.run("DELETE FROM notes WHERE ts = ?;",
-        [ts],
-        function (err) {
-            if (err) {
-                util.log('FAIL to delete ' + err);
-                callback(err);
-            } else {
-                callback(null);
+exports.loginAUser = function (values, callback) {
+    let user = null;
+    // let userName = null;
+    // console.log("userName2:"+values[0]);
+    async.series([function (cb) {
+        sqliteHelper.findNoteById(tableName, keyName, values[0],
+            function (error, result) {
+                if (error) throw cb(error, null);
+                // console.log("users1:" + result.userName);
+                user = result;
+                // cb(null,result);
+            },
+            function (error) {
+                if (error) throw cb(error, null);
+                cb(null);
+            });
+    }, function (cb) {
+        //0代表error,1代表成功登录,2代表用户不存在无法登录,3代表用户密码错误
+        if (user === null) {
+            sqliteHelper.add("users", colNames, values,
+                function (error) {
+                    if (error) {
+                        util.log('Fail on add a user:' + values[0] + 'because of error:' + error);
+                        callback(error, 0);
+                    }
+                    else {
+                        callback(null, 2);
+                        // console.log("exist");
+                    }
+                    cb(error);
+                });
+        }
+        else {
+            console.log("user exist"+user.password+"values[1]"+values[1]);
+            if (user.password === values[1]) {
+                callback(null, 1);
             }
-        });
+            else {
+                callback(null, 3);
+            }
+            cb();
+        }
+    }], function (error, values) {
+        // console.log("zzz")
+        if (error) throw error;
+    });
+
 }
 exports.edit = function (ts, author, note, callback) {
     db.run("UPDATE notes " +

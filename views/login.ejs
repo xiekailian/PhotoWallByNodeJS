@@ -61,18 +61,19 @@
         $("#login0").click(function(){
             var username = $("#username").val();
             var password = $("#password").val();
-            var data = {"uname":username,"upwd":password};
+            var data = {"userName":username,"password":password};
             $.ajax({
-                url:'/login',
+                url:'/users/login',
                 type:'post',
                 data: data,
                 success: function(data,status){
                     if(status == 'success'){
-                        location.href = 'home';
+                        location.href = '/';
                     }
                 },
                 error: function(data,status){
                     if(status == 'error'){
+                        console.log("error:"+status);
                         location.href = 'login';
                     }
                 }
