@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var photos = require('./routes/photos');
 
 var session = require('express-session');
 var util = require('util');
@@ -95,6 +96,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/photos',photos);
 // app.use('/login', users);
 // app.use('/register', users); // 即为为路径 /register 设置路由
 // app.use("/logout", users); // 即为为路径 /logout 设置路由

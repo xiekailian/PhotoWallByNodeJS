@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title> formdata file jquery ajax upload</title>
+</head>
+
+<body>
+<img id="showImg" src="" alt="">
+
+<form role="form" id="myForm" action="http://v0.api.upyun.com/xxx" method="post" enctype="multipart/form-data">
+
+  <input type="hidden" name="policy" value="">
+  <input type="hidden" name="signature" value="">
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">说明:</label>
+
+    <div class="col-sm-10">
+      <p class="form-control-static ">ajax 文件上传 。</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="url" class="col-sm-2 control-label"><s>*</s>图片选择:</label>
+
+    <div class="col-sm-7">
+      <input type="file" name="fulAvatar" id="file_upload" value=""
+             class="form-control" placeholder="图片地址" onchange="uploadByForm();">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-7">
+
+      <a id="btnAjax" onclick=>Ajax上传</a>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript">
+
+    /**
+     * ajax 上传。
+     */
+    function uploadByForm() {
+        //用form 表单直接 构造formData 对象; 就不需要下面的append 方法来为表单进行赋值了。
+        var formData = new FormData($("#myForm")[0]);
+        var url = "http://localhost:3000/uploader";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+            processData: false,
+            /**
+             *必须false才会自动加上正确的Content-Type
+             */
+            contentType: false,
+            success: function (responseStr) {
+                alert(responseStr.newPath);
+                $("img").attr({"src": responseStr.newPath}).prependTo($("body"));
+            },
+            error: function (responseStr) {
+                alert(responseStr.newPath);
+            }
+        });
+    }
+
+</script>
+</body>
+</html>
