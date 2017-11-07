@@ -1,0 +1,55 @@
+
+.cooperationConfirmButton{
+    background-color: #18ba60;
+    border-color: #18ba60;
+    padding:0px 15px 0px 15px;
+    color: #ffffff;
+}
+
+.cooperationConfirmButton:hover{
+    background-color: #2e363a;
+    border-color: #2e363a;
+}
+
+.cooperationFileButton{
+    padding:0px 15px 0px 15px;
+    color: #ffffff;
+}
+
+.cooperationFileButton:hover{
+    background-color: #2e363a;
+    border-color: #2e363a;
+}
+
+.cooperationFontSize{
+    font-size: large;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.contentFontSize{
+    font-size: medium;
+}
+
+.table tbody tr td{
+    vertical-align:middle;
+    text-align: center;
+    font-size: medium;
+}
+
+.table thead tr th{
+    font-size: large;
+    vertical-align:middle;
+    text-align: center;
+}
+
+.packageCreateFont{
+    font-size: large;
+    font-family: "Poppins", sans-serif;
+}
+
+.selectBackground{
+    background-color: #ffffff;
+}
+
+

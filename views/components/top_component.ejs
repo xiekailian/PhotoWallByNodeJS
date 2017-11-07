@@ -1,0 +1,57 @@
+<!-- /.top -->
+<header id="header" class="header bg-color">
+    <div class="container">
+        <div class="row">
+            <div class="header-wrap">
+                <div class="col-md-2">
+                    <div id="logo" class="logo">
+                        <a href="#" title="">
+                            <% if (user==null) { %>
+                            <% } else { %>
+                            欢迎，<%=user.userName%>！
+                            <%}%>
+                        </a>
+                    </div><!-- /#logo -->
+                </div><!-- /.col-md-2 -->
+                <div class="col-md-10">
+                    <div class="nav-wrap">
+                        <div class="btn-menu">
+                            <span></span>
+                        </div><!-- //mobile menu button -->
+                        <nav id="mainnav" class="collapse navbar-collapse menu">
+                            <ul class="nav navbar-nav sf-menu menu">
+                                <li>
+                                    <a href="/">
+                                        照片墙
+                                    </a>
+                                </li>
+                                <% if (user==null) { %>
+                                <li><a href="/users/login" title="">登录</a></li>
+
+                                <% } else { %>
+                                <li>
+                                    <a href="#" class="sf-with-ul">
+                                        我的相册
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="sf-with-ul">
+                                        我的好友
+                                    </a>
+                                    <!--<ul>-->
+                                        <!--<li><a href="/user/cooperationPlatform" class="sf-with-ul">选项</a></li>-->
+                                    <!--</ul>-->
+                                </li>
+                                <li><a href="users/logout">注销</a></li>
+
+                                <% }%>
+                            </ul>
+                        </nav>
+                    </div><!-- /.nav-wrap -->
+                </div><!-- /.col-md-9 -->
+            </div><!-- /.header-wrap -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</header>
+<!-- /header -->
+

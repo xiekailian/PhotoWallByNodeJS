@@ -1,0 +1,152 @@
+
+.input-holder{
+    margin-bottom: 30px;
+}
+
+#projectSearchInput{
+    display: inline-block;
+    width:120px;
+    height: 45px;
+    background: transparent;
+    border:1.5px solid #999;
+    border-radius: 40px;
+    font-family:"Open Sans", Arial, Verdana;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color:#666;
+    padding-right: 40px;
+}
+
+.search-button{
+    display: inline-block;
+    background-color: transparent;
+    height:45px;
+    padding: 0px;
+    color: #666;
+    border: 0px;
+    margin-left: -40px;
+}
+
+#search-icon{
+    font-size: 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.green{
+    color: #18ba60;
+}
+
+.greenBorder{
+    border:1px solid #18ba60;
+}
+
+.table tbody tr td{
+    vertical-align:middle;
+    text-align: center;
+    font-size: medium;
+}
+
+.table thead tr th{
+    font-size: large;
+    vertical-align:middle;
+    text-align: center;
+}
+
+.packageInfoButton:hover{
+    /*background-color: #2e363a;*/
+    /*border-color: #2e363a;*/
+    opacity:0.8;
+}
+
+.packageDeleteButton{
+    background-color: #ff6347;
+    border-color: #ff6347;
+}
+
+.packageDeleteButton:hover{
+    opacity: 0.8;
+}
+
+.formFont{
+    font-size: large;
+    font-family: "Poppins", sans-serif;
+    padding-bottom: 20px;
+}
+
+#analysisButton{
+    color: #fff;
+}
+
+#analysisButton:hover{
+    background-color: #2e363a;
+    border-color: #2e363a;
+}
+
+.greenBottomBorder{
+    border-bottom: 1px solid #18ba60;
+    margin-bottom: 20px;
+}
+
+.cashButton{
+    color: #666;
+    border-color: transparent;
+    height: 45px;
+    font-size: 15px;
+    font-weight: normal;
+    margin-left: 10px;
+    border-radius: 5px 5px 0px 0px ;
+    padding: 0px 10px 0px 10px ;
+    background-color: transparent;
+    -webkit-transition: all 0s ease-in-out;
+    -moz-transition: all 0s ease-in-out;
+    -ms-transition: all 0s ease-in-out;
+    -o-transition: all 0s ease-in-out;
+    transition: all 0s ease-in-out;
+}
+
+.cashClickButton{
+    color: #fff;
+    background-color: #18ba60;
+}
+
+.displayNone{
+    display: none;
+}
+
+.headLabel {
+    padding: 6px;
+    border-left: 5px solid #18ba60;
+    font-size: large;
+    font-weight: bold;
+    background-color: #98f898;
+    margin-bottom: 50px;
+    color: #353535;
+}
+
+.basicHeadLabel{
+    padding: 6px;
+    border-left: 5px solid #18ba60;
+    font-size: large;
+    font-weight: bold;
+    background-color: #98f898;
+    margin-bottom: 25px;
+    color: #353535;
+}
+
+
+.subLabel{
+    padding: 6px;
+    font-size: medium;
+    font-weight: bold;
+    background-color: #cfe2f3;
+    color: #353535;
+}
+
+
+
+

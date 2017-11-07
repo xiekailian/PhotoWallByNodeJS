@@ -1,7 +1,9 @@
 <!doctype html>
 <html lang="en">
+
+<%include components/head.ejs%>
 <head>
-  <meta charset="UTF-8" />
+  <!--<meta charset="UTF-8" />-->
   <title>css3照片墙</title>
   <style type="text/css">
     * {
@@ -12,12 +14,12 @@
       text-align: center;
       margin-top: 20px;
     }
-    .container {
+    .second_container {
       width: 1200px;
       height: 600px;
       margin: 50px auto;
     }
-    img {
+    .photo_display {
       vertical-align: top;
       padding: 10px 10px 15px 10px;
       background: #fff;
@@ -27,7 +29,7 @@
       transform: rotate(20deg);
       margin: 36px;
     }
-    img:hover {
+    .photo_display:hover {
       -webkit-transform: rotate(0deg);
       -moz-transform: rotate(0deg);
       transform: rotate(0deg);
@@ -42,7 +44,14 @@
   </style>
 </head>
 <body>
+<%include components/top_component.ejs%>
 <h1>照片墙</h1>
-<div class="container"> <img src="images/01.png"/> <img src="images/02.png"/> <img src="images/03.png"/> <img src="images/04.png"/> <img src="images/05.png"/> <img src="images/06.png"/> </div>
+<div class="second_container">
+  <img class="photo_display" src="images/01.png"/>
+  <img class="photo_display" src="images/02.png"/>
+  <img class="photo_display" src="images/03.png"/>
+  <img class="photo_display" src="images/04.png"/>
+  <img class="photo_display" src="images/05.png"/>
+  <img class="photo_display" src="images/06.png"/> </div>
 </body>
 </html>

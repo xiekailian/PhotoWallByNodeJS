@@ -14,7 +14,7 @@ router.route("/login").get(function (req, res) {    // 到达此路径则渲染l
     var userName = req.body.userName;
     var password = req.body.password;
     // console.log("userName:"+userName);
-    usersHandler.loginAUser([userName, password], function (error,loginStatus) {
+    usersHandler.loginAUser([userName, password], function (error,loginStatus,user) {
         if (loginStatus === 0) {
             res.send(500);
             req.session.error = '网络异常错误！';
@@ -22,6 +22,7 @@ router.route("/login").get(function (req, res) {    // 到达此路径则渲染l
         }
         else if(loginStatus===1){
             req.session.error = '登录成功！';
+            req.session.user = user;
             res.send(200);
         }
         else if(loginStatus===2){
@@ -110,7 +111,7 @@ router.route("/register").get(function (req, res) {    // 到达此路径则渲�
 router.get("/logout", function (req, res) {    // 到达 /logout 路径则登出， session中user,error对象置空，并重定向到根路径
     req.session.user = null;
     req.session.error = null;
-    res.redirect("/");
+    res.redirect("/users/login");
 });
 
 module.exports = router;

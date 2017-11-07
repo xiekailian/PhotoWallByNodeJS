@@ -81,22 +81,22 @@ exports.loginAUser = function (values, callback) {
                 function (error) {
                     if (error) {
                         util.log('Fail on add a user:' + values[0] + 'because of error:' + error);
-                        callback(error, 0);
+                        callback(error, 0, user);
                     }
                     else {
-                        callback(null, 2);
+                        callback(null, 2, user);
                         // console.log("exist");
                     }
                     cb(error);
                 });
         }
         else {
-            console.log("user exist"+user.password+"values[1]"+values[1]);
+            console.log("user exist" + user.password + "values[1]" + values[1]);
             if (user.password === values[1]) {
-                callback(null, 1);
+                callback(null, 1, user);
             }
             else {
-                callback(null, 3);
+                callback(null, 3, user);
             }
             cb();
         }
