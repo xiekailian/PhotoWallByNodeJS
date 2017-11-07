@@ -1,6 +1,6 @@
 //user数据库接口库
 var util = require('util');
-var sqliteHelper = require('./sqliteHelper');
+var sqliteHelper = require('../database/sqliteHelper');
 var async = require('async');
 var tableName = "users";
 var colNames = ["userName", "password"];
@@ -11,21 +11,23 @@ var keyName = "userName";
  */
 exports.addAUser = function (values, callback) {
     let user = null;
-    // let userName = null;
 
     async.series([function (cb) {
+        //顺序执行的代码一
         sqliteHelper.findNoteById(tableName, keyName, values[0],
             function (error, result) {
-                if (error) throw cb(error, null);
+                if (error) throw error;
                 // console.log("users1:" + result.userName);
                 user = result;
                 // cb(null,result);
             },
             function (error) {
                 if (error) throw cb(error, null);
+                //回调函数中也要传入cb，否则如果cb放在回调函数之外则无法完成同步
                 cb(null);
             });
     }, function (cb) {
+        //顺序执行的代码二
         //0代表error,1代表成功添加用户,2代表用户已存在无法添加
         if (user === null) {
             sqliteHelper.add("users", colNames, values,
@@ -38,6 +40,7 @@ exports.addAUser = function (values, callback) {
                         callback(null, 1);
                         // console.log("exist");
                     }
+                    //回调函数中也要传入cb，否则如果cb放在回调函数之外则无法完成同步
                     cb(error);
                 });
         }

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var usersHandler = require('../database/usersHandler');
+var usersHandler = require('../logic/usersHandler');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
