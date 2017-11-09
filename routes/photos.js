@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var usersHandler = require('../logic/usersHandler');
+var photosHandler = require('../logic/photosHandler');
 var formidable = require('formidable'),
     fs = require('fs'),
     TITLE = 'photos上传',
@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
 router.route("/myPhotos").get(function (req, res) {
     res.render('photos', { title: 'Photos' });
 }).post(function (req, res) {
-    var form = new formidable.IncomingForm();   //创建上传表单
+    let form = new formidable.IncomingForm();   //创建上传表单
     form.encoding = 'utf-8';        //设置编辑
     form.uploadDir = 'public' + PHOTOS_TEMP_FOLDER;     //设置上传文件的缓存目录
     form.keepExtensions = true;     //保留后缀
@@ -32,7 +32,7 @@ router.route("/myPhotos").get(function (req, res) {
         console.log("The file is:");
         console.log(files);
 
-        var extName = '';  //后缀名
+        let extName = '';  //后缀名
         switch (files.fulAvatar.type) {
             case 'image/pjpeg':
                 extName = 'jpg';
@@ -63,13 +63,14 @@ router.route("/myPhotos").get(function (req, res) {
         }
         else{
             console.log("save the file.");
-            var photoName = Math.random() + '.' + extName;
+            let photoName = Math.random() + '.' + extName;
             //图片写入地址；
-            var newPath = 'public'+PHOTOS_UPLOAD_FOLDER + photoName;
+            let newPath = 'public'+PHOTOS_UPLOAD_FOLDER + photoName;
             //显示地址；
-            var showUrl = domain + PHOTOS_UPLOAD_FOLDER + photoName;
+            let showUrl = domain + PHOTOS_UPLOAD_FOLDER + photoName;
             console.log("newPath",newPath);
             fs.renameSync(files.fulAvatar.path, newPath);  //重命名
+            photosHandler.addIntoAPhotoTable(res.locals.user.userName,photoName,PHOTOS_UPLOAD_FOLDER + photoName);
             res.json({
                 "newPath":showUrl
             });
