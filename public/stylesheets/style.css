@@ -3582,3 +3582,45 @@ article.post .content-post {
 	position: relative;
 	text-align: left;
 }
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.second_container {
+	width: 1200px;
+	height: 600px;
+	margin: 50px auto;
+}
+
+.photo_display {
+	vertical-align: top;
+	padding: 10px 10px 15px 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+	-webkit-transform: rotate(20deg); /*设置旋转角度*/
+	-moz-transform: rotate(20deg);
+	transform: rotate(20deg);
+	width: 280px;
+	height: 200px;
+	margin: 36px;
+}
+
+.photo_display:hover {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	transform: rotate(0deg);
+	-webkit-transform: scale(1.5); /*设置放大倍数*/
+	-moz-transform: scale(1.5);
+	transform: scale(1.5);
+	-webkit-transition: 2s; /*设置动画时间*/
+	-moz-transition: 2s;
+	transition: 2s;
+	box-shadow: 10px 10px 5px #EFEFEF;
+}

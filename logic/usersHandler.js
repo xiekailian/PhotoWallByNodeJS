@@ -91,7 +91,7 @@ exports.loginAUser = function (values, callback) {
                 });
         }
         else {
-            console.log("user exist" + user.password + "values[1]" + values[1]);
+            // console.log("user exist" + user.password + "values[1]" + values[1]);
             if (user.password === values[1]) {
                 callback(null, 1, user);
             }

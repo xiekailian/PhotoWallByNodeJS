@@ -74,6 +74,7 @@ app.use(function (req, res, next) {
     res.locals.user = req.session.user;   // 从session 获取 user对象,转存入本地新定义的user对象中，ejs模板里即可直接使用user对象
     // console.log("user:"+res.locals.user);
     var err = req.session.error;   //获取错误信息
+    // console.log("err:"+err);
     delete req.session.error;
     res.locals.message = "";   // 展示的信息 message
     if (err) {

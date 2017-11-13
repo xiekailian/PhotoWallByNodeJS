@@ -16,7 +16,16 @@ router.get('/', function (req, res, next) {
 });
 
 router.route("/myPhotos").get(function (req, res) {
-    res.render('photos', {title: 'Photos'});
+    photosHandler.getUserPhotoPaths(res.locals.user.userName, function (error, userPhotoPaths) {
+        if (error) {
+            util.log('Fail on get photoPaths because of error:' + error);
+            res.render('error', {title: 'error'});
+        }
+        else {
+            console.log("userPathPaths:" + userPhotoPaths);
+            res.render('photos', {userPhotoPaths: userPhotoPaths, title: 'photos'});
+        }
+    })
 }).post(function (req, res) {
     let form = new formidable.IncomingForm();   //创建上传表单
     form.encoding = 'utf-8';        //设置编辑
