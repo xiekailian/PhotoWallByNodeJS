@@ -4,14 +4,13 @@
 <% include components/head.ejs %>
 <head>
     <title> <%= title %></title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery-ui.css"/>
 </head>
 
 <body>
 <% include components/top_component.ejs %>
 <h1>我的相册</h1>
 <div class="container">
-    <img id="showImg" src="" alt="">
-
     <form role="form" id="myForm" action="http://v0.api.upyun.com/xxx" method="post" enctype="multipart/form-data">
 
         <input type="hidden" name="policy" value="">
@@ -26,13 +25,19 @@
         </div>
     </form>
 </div>
-<div class="second_container">
-    <%userPhotoPaths.forEach(function (userPhotoPath) {%>
-    <a href="<%= userPhotoPath%>" download=""><img class="photo_display" src="<%= userPhotoPath%>" /></a>
-    <%})%>
+<div class="second_container" id="main">
+    <div class="folder">
+        <div class="front"></div>
+        <div class="back"></div>
+    </div>
+    <% userPhotoPaths.forEach(function (userPhotoPath) { %>
+    <a href="<%= userPhotoPath %>" download=""><img class="photo_display" src="<%= userPhotoPath %>"/></a>
+    <% }) %>
 </div>
+​
 
-<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+<script type="text/javascript" src="/javascripts/jquery-ui.js"></script>
+<script type="text/javascript" src="/javascripts/dragAndDropScript.js"></script>
 <script type="text/javascript">
 
     /**
@@ -58,14 +63,13 @@
             contentType: false,
             success: function (responseStr) {
                 alert(responseStr.newPath);
-                $("#showImg").attr({"src": responseStr.newPath}).prependTo($("body"));
+                location.href = "/photos/myPhotos";
             },
             error: function (responseStr) {
                 alert(responseStr.newPath);
             }
         });
     }
-
 </script>
 </body>
 </html>

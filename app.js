@@ -61,15 +61,12 @@ app.on('close', function (error) {
 //     if (error) throw error;
 // });
 
-
-
 app.use(session({
     secret: 'secret',
     cookie: {
         maxAge: 1000 * 60 * 30
     }
 }));
-
 
 app.use(function (req, res, next) {
     res.locals.user = req.session.user;   // 从session 获取 user对象,转存入本地新定义的user对象中，ejs模板里即可直接使用user对象
@@ -96,8 +93,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-//登录拦截器
+//登录拦截器，必须放在静态资源声明之后、路由导航之前
 app.use(function (req, res, next) {
     var url = req.originalUrl;
     if (url != "/users/login" && !req.session.user) {
