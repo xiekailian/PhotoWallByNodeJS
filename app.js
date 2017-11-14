@@ -70,6 +70,7 @@ app.use(session({
     }
 }));
 
+
 app.use(function (req, res, next) {
     res.locals.user = req.session.user;   // 从session 获取 user对象,转存入本地新定义的user对象中，ejs模板里即可直接使用user对象
     // console.log("user:"+res.locals.user);
@@ -96,6 +97,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+//登录拦截器
+app.use(function (req, res, next) {
+    var url = req.originalUrl;
+    if (url != "/users/login" && !req.session.user) {
+        return res.redirect("/users/login");
+    }
+    next();
+});
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/photos',photos);
@@ -104,6 +114,7 @@ app.use('/photos',photos);
 // app.use("/logout", users); // 即为为路径 /logout 设置路由
 
 // catch 404 and forward to error handler
+
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
