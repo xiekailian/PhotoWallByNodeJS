@@ -3634,8 +3634,8 @@ h1 {
 	perspective: 800px;
 
 	position:fixed;
-	bottom:0;
-	left: 92%;
+	bottom:10%;
+	left: 5%;
 	z-index: 0;
 
 	width: 160px;
@@ -3737,7 +3737,3 @@ h1 {
 /*----------------------------
 	Draggable Icons
 -----------------------------*/
-
-#main img{
-	cursor:move;
-}

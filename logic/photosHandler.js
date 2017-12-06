@@ -50,5 +50,18 @@ exports.getUserPhotoPaths = function (userName, callback) {
             callback(null, userPhotoPaths);
         }
     });
+}
 
+exports.deleteUserPhoto = function (userName, photoPath, callback) {
+    let userPhotoTableName = userName + "_photos";
+    let colName = "photoPath";
+    sqliteHelper.delete(userPhotoTableName, colName, photoPath, function (error) {
+        if (error) {
+            util.log('Fail on delete:' + error);
+            callback(error);
+        }
+        else {
+            callback(null);
+        }
+    })
 }

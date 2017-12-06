@@ -22,7 +22,7 @@ router.route("/myPhotos").get(function (req, res) {
             res.render('error', {title: 'error'});
         }
         else {
-            console.log("userPathPaths:" + userPhotoPaths);
+            // console.log("userPathPaths:" + userPhotoPaths);
             res.render('photos', {userPhotoPaths: userPhotoPaths, title: 'photos'});
         }
     })
@@ -75,7 +75,6 @@ router.route("/myPhotos").get(function (req, res) {
         else {
             //相对项目根目录的用户照片文件夹路径，fs.renameSync使用相对根目录的路径
             let userPhotoPath = PHOTOS_UPLOAD_FOLDER + res.locals.user.userName + '/';
-            console.log("save the file.");
             let photoName = Math.random() + '.' + extName;
             //图片写入地址，不同用户文件夹不一样；
             let newPath = 'public' + userPhotoPath + photoName;
@@ -88,16 +87,16 @@ router.route("/myPhotos").get(function (req, res) {
                         //判断用户的照片文件夹是否存在，不存在就创建一个
                         fs.exists(userPhotoFolderPath, function (exists) {
                             if (!exists) {
-                                console.log('文件夹不存在');
+                                // console.log('文件夹不存在');
                                 fs.mkdir(userPhotoFolderPath, function (err) {
                                     if (err)
                                         console.error(err);
-                                    console.log('创建目录成功');
+                                    // console.log('创建目录成功');
                                     cb();
                                 });
                             }
                             else {
-                                console.log('文件夹存在');
+                                // console.log('文件夹存在');
                                 cb();
                             }
                         });
@@ -119,6 +118,16 @@ router.route("/myPhotos").get(function (req, res) {
         }
     });
 
+});
+
+router.route("/myPhotos/delete").post(function (req, res) {
+    let photoPath = req.body.photoPath;
+    console.log("photoPath:" + photoPath);
+    photosHandler.deleteUserPhoto(req.session.user.userName, photoPath, function (error) {
+        if (error) {
+            util.log('Fail on delete:' + error);
+        }
+    })
 });
 
 module.exports = router;

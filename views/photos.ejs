@@ -62,11 +62,11 @@
              */
             contentType: false,
             success: function (responseStr) {
-                alert(responseStr.newPath);
+//                alert(responseStr.newPath);
                 location.href = "/photos/myPhotos";
             },
             error: function (responseStr) {
-                alert(responseStr.newPath);
+                alert("只能上传图片文件！");
             }
         });
     }

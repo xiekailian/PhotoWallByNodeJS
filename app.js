@@ -96,7 +96,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //登录拦截器，必须放在静态资源声明之后、路由导航之前
 app.use(function (req, res, next) {
     var url = req.originalUrl;
-    if (url != "/users/login" && !req.session.user) {
+    if (url != "/users/login" && url != "/users/register" && !req.session.user) {
         return res.redirect("/users/login");
     }
     next();
@@ -104,7 +104,7 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
-app.use('/photos',photos);
+app.use('/photos', photos);
 // app.use('/login', users);
 // app.use('/register', users); // 即为为路径 /register 设置路由
 // app.use("/logout", users); // 即为为路径 /logout 设置路由
